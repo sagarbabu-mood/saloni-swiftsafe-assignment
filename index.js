@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const bp = require("body-parser");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
@@ -52,12 +51,11 @@ app.post("/register", async (request, response) => {
       response.send("Password is too short");
     } else {
       try {
-        const hashedPassword = await bcrypt.hash(password, 10);
         const createUserQuery = `
           INSERT INTO user_credentials(username, password)
           VALUES(?, ?);`;
 
-        await db.run(createUserQuery, [username, hashedPassword]);
+        await db.run(createUserQuery, [username, password]);
         response.send("User created successfully");
       } catch (error) {
         console.error("Error creating user:", error);
@@ -83,7 +81,7 @@ app.post("/login/", async (req, res) => {
     res.status(400);
     res.send("Invalid User");
   } else {
-    const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
+    const isPasswordMatched = password === dbUser.password;
     if (isPasswordMatched === true) {
       const payload = {
         username: username,
