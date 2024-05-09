@@ -25,8 +25,8 @@ const initializeDbAndServer = async () => {
       filename: dbPath,
       driver: sqlite3.Database,
     });
-    app.listen(3001, () => {
-      console.log("Server Running at http://localhost:3001/");
+    app.listen(3004, () => {
+      console.log("Server Running at http://localhost:3004/");
     });
   } catch (e) {
     console.error(`DB Error: ${e.message}`);
@@ -121,7 +121,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Endpoint to get products with optional filtering
-app.get("/products", authenticateToken, async(req, res) => {
+app.get("/products", authenticateToken, async (req, res) => {
   const { category = "", type = "", search = "" } = req.query;
 
   const selectProductQuery = `

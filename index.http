@@ -1,0 +1,21 @@
+###
+POST http://localhost:3004/register
+Content-Type: application/json
+
+{
+    "username":"rahul",
+    "password":"rahul@2021"
+}
+
+###
+POST http://localhost:3004/login 
+Content-Type: application/json
+
+{
+    "username":"rahul",
+    "password":"rahul@2021"
+}
+
+###
+GET http://localhost:3004/products/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiaWF0IjoxNzE1MjUyMDc2fQ.YTht_iO2Hz6fYQpO1JdVdTkjVaE7kAnELtqPQdoF5YY
